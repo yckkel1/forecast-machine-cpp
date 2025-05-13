@@ -1,0 +1,15 @@
+# Xcode
+*.xcuserdata
+*.xcuserstate
+*.xcworkspace
+DerivedData/
+build/
+
+# macOS
+.DS_Store
+
+# C++
+*.o
+*.out
+*.log
+
