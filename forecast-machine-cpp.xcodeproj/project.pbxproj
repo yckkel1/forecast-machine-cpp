@@ -25,6 +25,9 @@
 /* Begin PBXFileReference section */
 		5882AD132DD2E0E9004B22C0 /* forecast-machine-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "forecast-machine-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5882AD1D2DD2E70C004B22C0 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		5882AD1F2DD2E8DC004B22C0 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
+		5882AD202DD2E8DC004B22C0 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
+		5882AD212DD2ED8A004B22C0 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +44,9 @@
 		5882AD0A2DD2E0E9004B22C0 = {
 			isa = PBXGroup;
 			children = (
+				5882AD212DD2ED8A004B22C0 /* data */,
+				5882AD202DD2E8DC004B22C0 /* include */,
+				5882AD1F2DD2E8DC004B22C0 /* src */,
 				5882AD1D2DD2E70C004B22C0 /* main.cpp */,
 				5882AD152DD2E0E9004B22C0 /* forecast-machine-cpp */,
 				5882AD142DD2E0E9004B22C0 /* Products */,

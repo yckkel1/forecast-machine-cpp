@@ -2,6 +2,8 @@
 *.xcuserdata
 *.xcuserstate
 *.xcworkspace
+# Ignore all internal files inside the Xcode project bundle
+forecast-machine-cpp.xcodeproj/*
 DerivedData/
 build/
 
