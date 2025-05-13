@@ -1,11 +1,10 @@
 # Xcode
-*.xcuserdata
-*.xcuserstate
-*.xcworkspace
-# Ignore all internal files inside the Xcode project bundle
-forecast-machine-cpp.xcodeproj/*
-DerivedData/
+# Ignore CMake build artifacts
 build/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
 
 # macOS
 .DS_Store
