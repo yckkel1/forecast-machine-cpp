@@ -26,9 +26,3 @@ source_group("Header Files" FILES ${HEADERS})
 
 # Build the executable
 add_executable(forecast_engine ${SOURCES} ${HEADERS})
-
-add_custom_command(TARGET forecast_engine POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${PROJECT_SOURCE_DIR}/data
-            $<TARGET_FILE_DIR:forecast_engine>/data
-)

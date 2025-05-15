@@ -7,11 +7,18 @@
 
 #include <iostream>
 #include <filesystem>
-#include "basic_forecast.hpp"
+#include "csv_loader.hpp"
 
 int main(int argc, const char * argv[]) {
-    
-    std::string file_path = "data/sp500_sample.csv";
+    // dynamically load csv on command line
+    std::string file_path;
+    if (argc > 1) {
+        file_path = argv[1];
+    } else {
+        std::cerr << "Usage: " << argv[0] << " <path_to_csv>" << std::endl;
+        return 1;
+    }
+
     std::vector<double> series = load_csv_column(file_path);
 
     if (series.empty()) {
@@ -19,9 +26,9 @@ int main(int argc, const char * argv[]) {
         return 1;
     }
 
-    for (double close : series) {
-        std::cout << close << std::endl;
-    }
+//    for (double close : series) {
+//        std::cout << close << std::endl;
+//    }
     
     return 0;
 }

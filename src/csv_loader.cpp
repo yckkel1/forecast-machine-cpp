@@ -1,5 +1,6 @@
-#include "basic_forecast.hpp"
+#include "csv_loader.hpp"
 #include <fstream>
+#include <filesystem>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -8,6 +9,7 @@
 constexpr int CLOSE = 4;  // Index of "Close" column in sp500.csv
 
 std::vector<double> load_csv_column(const std::string& file_path) {
+    std::cout << std::filesystem::current_path() << std::endl;
     std::vector<double> values;
     std::ifstream file(file_path);
     std::string line;
