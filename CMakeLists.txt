@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
 project(ForecastEngine)
-set(CMAKE_OSX_DEPLOYMENT_TARGET "12.2" CACHE STRING "Minimum OS version" FORCE)
 
 
 # C++ standard
