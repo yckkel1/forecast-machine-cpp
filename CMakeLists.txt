@@ -3,8 +3,9 @@ project(ForecastEngine)
 
 
 # C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_OSX_DEPLOYMENT_TARGET "15.3")
 
 # Enable Debug and Release configs
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
@@ -18,10 +19,12 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 set(SOURCES ${SOURCES} ${PROJECT_SOURCE_DIR}/main.cpp)
 file(GLOB_RECURSE HEADERS "include/*.hpp")
+file(GLOB_RECURSE SCRIPTS "scripts/*.sh")
 
 # Group files for Xcode UI organization
 source_group("Source Files" FILES ${SOURCES})
 source_group("Header Files" FILES ${HEADERS})
+source_group("Bash Scripts" FILES ${SCRIPTS})
 
 # Build the executable
-add_executable(forecast_engine ${SOURCES} ${HEADERS})
+add_executable(forecast_engine ${SOURCES} ${HEADERS} ${SCRIPTS})

@@ -5,9 +5,12 @@
 //  Created by yuxin chen on 5/12/25.
 //
 
+#include <dto/row_data.hpp>
 #include <iostream>
 #include <filesystem>
 #include "csv_loader.hpp"
+#include <chrono>
+#include <sstream>
 
 int main(int argc, const char * argv[]) {
     // dynamically load csv on command line
@@ -19,16 +22,11 @@ int main(int argc, const char * argv[]) {
         return 1;
     }
 
-    std::vector<double> series = load_csv_column(file_path);
-
-    if (series.empty()) {
-        std::cerr << "Error: Failed to load data from " << std::endl;
-        return 1;
+    std::vector<RowData> series = load_csv(file_path);
+    
+    for(const RowData& data : series) {
+        std::cout << data;
     }
-
-//    for (double close : series) {
-//        std::cout << close << std::endl;
-//    }
     
     return 0;
 }
