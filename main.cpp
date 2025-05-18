@@ -5,6 +5,7 @@
 //  Created by yuxin chen on 5/12/25.
 //
 
+#include <dto/row_data.hpp>
 #include <iostream>
 #include <filesystem>
 #include "csv_loader.hpp"
@@ -19,7 +20,7 @@ int main(int argc, const char * argv[]) {
         return 1;
     }
 
-    std::vector<double> series = load_csv_column(file_path);
+    std::vector<RowData> series = load_csv(file_path);
 
     if (series.empty()) {
         std::cerr << "Error: Failed to load data from " << std::endl;

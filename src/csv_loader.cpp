@@ -1,4 +1,6 @@
 #include "csv_loader.hpp"
+#include "dto/row_data.hpp"
+#include "util/data_utils.hpp"
 #include <fstream>
 #include <filesystem>
 #include <iostream>
@@ -6,37 +8,38 @@
 #include <string>
 #include <vector>
 
-constexpr int CLOSE = 4;  // Index of "Close" column in sp500.csv
-
-std::vector<double> load_csv_column(const std::string& file_path) {
+std::vector<RowData> load_csv(const std::string& file_path) {
     std::cout << std::filesystem::current_path() << std::endl;
-    std::vector<double> values;
+    std::vector<RowData> values;
     std::ifstream file(file_path);
+    
+    std::string header_line;
+    std::getline(file, header_line);
+    std::unordered_map<std::string, int> header_map = util::parse_csv_headers(header_line);
+    
     std::string line;
-
-    bool is_first_line = true;
     while (std::getline(file, line)) {
-        if (is_first_line) {
-            is_first_line = false;
-            continue;  // skip header
+        std::vector<std::string> row = util::split_csv_line(line);
+        if(row.size() != header_map.size()) {
+            throw new std::runtime_error("Invalid csv data");
         }
-
-        std::stringstream ss(line);
-        std::string cell;
-        int col_index = 0;
-
-        while (std::getline(ss, cell, ',')) {
-            if (col_index == CLOSE) {
-                try {
-                    values.push_back(std::stod(cell));
-                } catch (const std::invalid_argument& e) {
-                    std::cerr << "Warning: invalid number format in CSV: " << cell << std::endl;
-                } catch (const std::out_of_range& e) {
-                    std::cerr << "Warning: number out of range in CSV: " << cell << std::endl;
-                }
-                break;
-            }
-            ++col_index;
+        
+        try {
+            RowData rowData (
+                util::parse_date_string(row[header_map["Date"]]),
+                std::stod(row[header_map["Open"]]),
+                std::stod(row[header_map["High"]]),
+                std::stod(row[header_map["Low"]]),
+                std::stod(row[header_map["Close"]]),
+                std::stoul(row[header_map["Volume"]])
+            );
+            values.push_back(rowData);
+        } catch (const std::invalid_argument& e) {
+            throw new std::runtime_error(std::string("Invalid input: ") + e.what());
+        } catch (const std::out_of_range& e) {
+            throw new std::runtime_error(std::string("Value out of range: ") + e.what());
+        } catch (const std::runtime_error& e) {
+            throw new std::runtime_error(std::string("Date parsing failed: ") + e.what());
         }
     }
 
