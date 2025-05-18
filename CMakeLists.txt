@@ -23,7 +23,7 @@ file(GLOB_RECURSE SCRIPTS "scripts/*.sh")
 # Group files for Xcode UI organization
 source_group("Source Files" FILES ${SOURCES})
 source_group("Header Files" FILES ${HEADERS})
-source_grouup("Bash Scripts" FILES ${SCRIPTS})
+source_group("Bash Scripts" FILES ${SCRIPTS})
 
 # Build the executable
 add_executable(forecast_engine ${SOURCES} ${HEADERS} ${SCRIPTS})
