@@ -18,10 +18,12 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 set(SOURCES ${SOURCES} ${PROJECT_SOURCE_DIR}/main.cpp)
 file(GLOB_RECURSE HEADERS "include/*.hpp")
+file(GLOB_RECURSE SCRIPTS "scripts/*.sh")
 
 # Group files for Xcode UI organization
 source_group("Source Files" FILES ${SOURCES})
 source_group("Header Files" FILES ${HEADERS})
+source_grouup("Bash Scripts" FILES ${SCRIPTS})
 
 # Build the executable
-add_executable(forecast_engine ${SOURCES} ${HEADERS})
+add_executable(forecast_engine ${SOURCES} ${HEADERS} ${SCRIPTS})
