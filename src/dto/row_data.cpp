@@ -1,27 +1,21 @@
 #pragma once
 
+#include "dto/row_data.hpp"
+#include "util/data_utils.hpp"
 #include <string>
-#include <chrono>
 #include <iostream>
+#include <sstream>
 
-class RowData {
-private:
-    std::chrono::year_month_day date;
-    double open;
-    double high;
-    double low;
-    double close;
-    unsigned long volume;
+std::ostream& operator<< (std::ostream& os, const RowData& row_data) {
+    std::string date_str = util::date_to_string(row_data.getDate());
+    
+    os << "Date: " << date_str << " ";
+    os << "Open: " << row_data.getOpen() << " ";
+    os << "Low: " << row_data.getLow() << " ";
+    os << "High: " << row_data.getHigh() << " ";
+    os << "Close: " << row_data.getClose() << " ";
+    os << "Volume: " << row_data.getVolume() << std::endl;
+    return os;
+}
 
-public:
-    RowData(std::chrono::year_month_day date, double open, double high, double low, double close, unsigned long volume)
-        : date(date), open(open), high(high), low(low), close(close), volume(volume) {}
-
-    std::chrono::year_month_day getDate() const { return date; }
-    double getOpen() const { return open; }
-    double getHigh() const { return high; }
-    double getLow() const { return low; }
-    double getClose() const { return close; }
-    unsigned long getVolume() const { return volume; }
-};
 

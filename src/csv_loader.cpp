@@ -14,7 +14,10 @@ std::vector<RowData> load_csv(const std::string& file_path) {
     std::ifstream file(file_path);
     
     std::string header_line;
-    std::getline(file, header_line);
+    if(std::getline(file, header_line)) {
+        std::cout << "header: " << header_line << std::endl;
+    }
+    
     std::unordered_map<std::string, int> header_map = util::parse_csv_headers(header_line);
     
     std::string line;
@@ -31,7 +34,7 @@ std::vector<RowData> load_csv(const std::string& file_path) {
                 std::stod(row[header_map["High"]]),
                 std::stod(row[header_map["Low"]]),
                 std::stod(row[header_map["Close"]]),
-                std::stoul(row[header_map["Volume"]])
+                std::stoull(row[header_map["Volume"]])
             );
             values.push_back(rowData);
         } catch (const std::invalid_argument& e) {
