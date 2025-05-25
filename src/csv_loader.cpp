@@ -1,4 +1,5 @@
 #include "csv_loader.hpp"
+#include "dto/plot_data.hpp"
 #include "dto/row_data.hpp"
 #include "util/data_utils.hpp"
 #include <fstream>
@@ -47,5 +48,19 @@ std::vector<RowData> load_csv(const std::string& file_path) {
     }
 
     return values;
+}
+
+void write_forecast_to_csv(const std::vector<PlotData>& data, const std::string& filePath) {
+    std::ofstream out(filePath);
+    if(!out.is_open()) {
+        throw std::runtime_error("Failed to open: " + filePath);
+    }
+    
+    out << "date,value\n";
+    for (const PlotData& entry : data) {
+        out << util::date_to_string(entry.getDate()) << "," << entry.getValue() << "\n";
+    }
+    
+    out.close();
 }
 

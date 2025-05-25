@@ -1,10 +1,15 @@
 #pragma once
 
+#include "dto/plot_data.hpp"
+#include "dto/row_data.hpp"
+
 #include <iostream>
 #include <vector>
 
 class ForecastEngine {
+protected:
+    std::string forecast_method;
 public:
-    virtual std::vector<double> forecast(const std::vector<double>& data, int steps_ahed);
+    virtual std::vector<PlotData> forecast(const std::vector<RowData>& data, int steps_ahed) = 0;
     virtual ~ForecastEngine() = default;
 };
