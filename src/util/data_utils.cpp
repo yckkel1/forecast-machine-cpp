@@ -28,6 +28,14 @@ namespace util {
         return ss.str();
     }
 
+    std::string date_to_compact_string(const std::chrono::year_month_day& ymd) {
+        std::ostringstream ss;
+        ss << static_cast<int>(ymd.year());
+        ss << static_cast<unsigned>(ymd.month());
+        ss << static_cast<unsigned>(ymd.day());
+        return ss.str();
+    }
+
     std::unordered_map<std::string, int> parse_csv_headers(const std::string& header_line) {
         std::unordered_map<std::string, int> header_map;
         int idx = 0;

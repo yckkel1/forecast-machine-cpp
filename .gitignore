@@ -14,3 +14,6 @@ cmake_install.cmake
 *.out
 *.log
 
+# Ignore output files
+output/
+
