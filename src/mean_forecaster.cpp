@@ -1,12 +1,19 @@
-// src/mean_forecaster.cpp
-#pragma once
-
 #include "mean_forecaster.hpp"
 
 #include <iostream>
 #include <vector>
 #include <numeric>
 #include <chrono>
+#include "util/forecaster_registry.hpp"
+
+namespace {
+    const bool registered = [] {
+        get_forecaster_registry()["mean"] = [] {
+            return std::make_unique<MeanForecaster>();
+        };
+        return true;
+    } ();
+}
 
 std::vector<PlotData> MeanForecaster::forecast(const std::vector<RowData>& data, int steps_ahead) {
     // returns a vector of length steps_ahead, where each element is mean of data

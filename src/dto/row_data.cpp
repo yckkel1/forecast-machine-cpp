@@ -1,5 +1,3 @@
-#pragma once
-
 #include "dto/row_data.hpp"
 #include "util/data_utils.hpp"
 #include <string>

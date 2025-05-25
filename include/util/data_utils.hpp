@@ -3,6 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include "dto/plot_data.hpp"
 
 namespace util {
 
@@ -17,4 +18,6 @@ namespace util {
     std::vector<std::string> split_csv_line (const std::string& line);
 
     std::string trim(const std::string& str);
+
+    std::string output_file_path(const std::vector<PlotData>& data, const std::string& forecast_method);
 }

@@ -1,11 +1,12 @@
-#pragma once
-
 #include "util/data_utils.hpp"
 #include <string>
 #include <chrono>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <vector>
+
+constexpr std::string output_dir = "output/";
 
 namespace util {
     std::chrono::year_month_day parse_date_string(const std::string& date_string) {
@@ -62,6 +63,14 @@ namespace util {
         auto end   = std::find_if_not(str.rbegin(), str.rend(), ::isspace).base();
         if (begin >= end) return "";
         return std::string(begin, end);
+    }
+    
+    std::string output_file_path(const std::vector<PlotData>& data, const std::string& forecast_method) {
+        std::string file_path = output_dir + forecast_method + "/";
+        std::string begin_date = util::date_to_compact_string(data.begin()->getDate());
+        std::string end_date = util::date_to_compact_string(data.back().getDate());
+        // example: output/mean/mean_forecast_20250101_20250102.csv
+        return file_path + forecast_method + "_forecast_" + begin_date + "_" + end_date + ".csv";
     }
 }
 

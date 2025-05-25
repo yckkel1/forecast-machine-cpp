@@ -13,29 +13,53 @@
 #include <sstream>
 #include "mean_forecaster.hpp"
 #include "util/data_utils.hpp"
+#include "util/forecaster_registry.hpp"
 
 int main(int argc, const char * argv[]) {
     // dynamically load csv on command line
-    if (argc != 3) {
-        std::cerr << "Usage: ./forecast_machine <file_path> <forecast_steps>\n";
+    if (argc != 4) {
+        std::cerr << "Usage: ./forecast_machine <input_file_path> <steps_ahead> <forecast_method>\n";
         return 1;
     }
 
-    std::string file_path = argv[1];
+    std::string input_file_path = argv[1];
     int steps_ahead = std::stoi(argv[2]);
+    std::string forecast_method = argv[3];
 
-    std::vector<RowData> source_data = load_csv(file_path);
+    std::vector<RowData> source_data;
+    try {
+        source_data = load_csv(input_file_path);
+    } catch (const std::exception& e) {
+        std::cerr << "Failed to load CSV: " << e.what() << std::endl;
+        return 1;
+    }
+
+    if (source_data.empty()) {
+        std::cerr << "Input data is empty" << std::endl;
+        return 1;
+    }
     
 //    for(const RowData& data : source_data) {
 //        std::cout << data.getDate();
 //    }
-    MeanForecaster meanForecaster;
-    std::vector<PlotData> output_data = meanForecaster.forecast(source_data, steps_ahead);
-    std::string begin_date = util::date_to_compact_string(output_data.begin()->getDate());
-    std::string end_date = util::date_to_compact_string(output_data.back().getDate());
+    std::unique_ptr<ForecastEngine> forecaster;
+    std::vector<PlotData> output_data;
+    try {
+        forecaster = create_forecaster(forecast_method);
+        std::cout << "Using forecast method: " << forecast_method << std::endl;
+        output_data = forecaster->forecast(source_data, steps_ahead);
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << "\n";
+        return 1;
+    }
     
-    std::string output_file_path =  "output/" + meanForecaster.get_forecast_method() + "_" + begin_date + "_" + end_date + ".csv";
-    write_forecast_to_csv(output_data, output_file_path);
+    try {
+        std::string output_file_path = util::output_file_path(output_data, forecast_method);
+        write_forecast_to_csv(output_data, output_file_path);
+    } catch (const std::exception& e) {
+        std::cerr << "Failed to write forecast to csv: " << e.what() << "\n";
+        return 1;
+    }
     
     return 0;
 }
