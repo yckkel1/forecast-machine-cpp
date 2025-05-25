@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iomanip>
 #include <vector>
+#include <filesystem>
 
 constexpr std::string output_dir = "output/";
 
@@ -66,11 +67,14 @@ namespace util {
     }
     
     std::string output_file_path(const std::vector<PlotData>& data, const std::string& forecast_method) {
-        std::string file_path = output_dir + forecast_method + "/";
+        std::string file_path = output_dir + forecast_method;
+        if (!std::filesystem::exists(file_path)) {
+            std::filesystem::create_directories(file_path);
+        }
         std::string begin_date = util::date_to_compact_string(data.begin()->getDate());
         std::string end_date = util::date_to_compact_string(data.back().getDate());
         // example: output/mean/mean_forecast_20250101_20250102.csv
-        return file_path + forecast_method + "_forecast_" + begin_date + "_" + end_date + ".csv";
+        return file_path + "/" + forecast_method + "_forecast_" + begin_date + "_" + end_date + ".csv";
     }
 }
 
