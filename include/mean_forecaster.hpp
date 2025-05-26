@@ -1,7 +1,6 @@
 #pragma once
 
 #include "forecast_engine.hpp"
-#include "dto/plot_data.hpp"
 
 class MeanForecaster : public ForecastEngine{
 public:

@@ -17,14 +17,19 @@
 
 int main(int argc, const char * argv[]) {
     // dynamically load csv on command line
-    if (argc != 4) {
-        std::cerr << "Usage: ./forecast_machine <input_file_path> <steps_ahead> <forecast_method>\n";
+    if (argc < 4) {
+        std::cerr << "Usage: ./forecast_machine <input_file_path> <steps_ahead> <forecast_method> <optional: alpha>\n";
         return 1;
     }
 
     std::string input_file_path = argv[1];
     int steps_ahead = std::stoi(argv[2]);
     std::string forecast_method = argv[3];
+    std::vector<std::string> args;
+    int args_ct = 4;
+    while (args_ct < argc) {
+        args.push_back(argv[args_ct++]);
+    }
 
     std::vector<RowData> source_data;
     try {
@@ -45,7 +50,7 @@ int main(int argc, const char * argv[]) {
     std::unique_ptr<ForecastEngine> forecaster;
     std::vector<PlotData> output_data;
     try {
-        forecaster = create_forecaster(forecast_method);
+        forecaster = create_forecaster(forecast_method, args);
         std::cout << "Using forecast method: " << forecast_method << std::endl;
         output_data = forecaster->forecast(source_data, steps_ahead);
     } catch (const std::exception& e) {
