@@ -25,11 +25,7 @@ int main(int argc, const char * argv[]) {
     std::string input_file_path = argv[1];
     int steps_ahead = std::stoi(argv[2]);
     std::string forecast_method = argv[3];
-    std::vector<std::string> args;
-    int args_ct = 4;
-    while (args_ct < argc) {
-        args.push_back(argv[args_ct++]);
-    }
+    std::vector<std::string> args(argv + 4, argv + argc);
 
     std::vector<RowData> source_data;
     try {
