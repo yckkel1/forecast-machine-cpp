@@ -24,17 +24,17 @@ namespace util {
 
     std::string date_to_string(const std::chrono::year_month_day& ymd) {
         std::ostringstream ss;
-        ss << static_cast<int>(ymd.year()) << "-";
-        ss << static_cast<unsigned>(ymd.month()) << "-";
-        ss << static_cast<unsigned>(ymd.day());
+        ss << static_cast<int>(ymd.year()) << "-"
+        << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.month()) << "-"
+        << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.day());
         return ss.str();
     }
 
     std::string date_to_compact_string(const std::chrono::year_month_day& ymd) {
         std::ostringstream ss;
-        ss << static_cast<int>(ymd.year());
-        ss << static_cast<unsigned>(ymd.month());
-        ss << static_cast<unsigned>(ymd.day());
+        ss << static_cast<int>(ymd.year())
+        << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.month())
+        << std::setw(2) << std::setfill('0') << static_cast<unsigned>(ymd.day());
         return ss.str();
     }
 
