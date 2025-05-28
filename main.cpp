@@ -18,13 +18,13 @@
 int main(int argc, const char * argv[]) {
     // dynamically load csv on command line
     if (argc < 4) {
-        std::cerr << "Usage: ./forecast_machine <input_file_path> <steps_ahead> <forecast_method> <optional: alpha>\n";
+        std::cerr << "Usage: ./forecast_machine <input_file_path> <forecast_method> <steps_ahead> <optional: alpha>\n";
         return 1;
     }
 
     std::string input_file_path = argv[1];
-    int steps_ahead = std::stoi(argv[2]);
-    std::string forecast_method = argv[3];
+    std::string forecast_method = argv[2];
+    int steps_ahead = std::stoi(argv[3]);
     std::vector<std::string> args(argv + 4, argv + argc);
 
     std::vector<RowData> source_data;
