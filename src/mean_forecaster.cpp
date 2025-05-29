@@ -8,7 +8,7 @@
 
 namespace {
     const bool registered = [] {
-        get_forecaster_registry()["mean"] = [] (const std::vector<std::string>& args) {
+        get_forecaster_registry()["mean"] = [] (const ArgParser& arg_parser) {
             return std::make_unique<MeanForecaster>();
         };
         return true;

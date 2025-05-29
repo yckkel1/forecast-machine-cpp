@@ -12,23 +12,24 @@
 
 namespace {
     const bool registered = [] {
-        get_forecaster_registry()["ewma"] = [] (const std::vector<std::string>& args) {
-            if (args.empty()) {
-                return std::make_unique<EwmaForecaster>();
-            }
-            else {
-                double alpha;
-                try {
-                    alpha = std::stod(args[0]);
-                } catch (std::exception& e) {
-                    throw std::runtime_error(std::string("Invalid alpha: ") + e.what());
-                }
-                
-                if(alpha < 0.0 || alpha > 1.0) {
-                    throw std::runtime_error("alpha must be between 0 and 1");
-                }
-                return std::make_unique<EwmaForecaster>(alpha);
-            }
+        get_forecaster_registry()["ewma"] = [] (const ArgParser& arg_parser) {
+              return std::make_unique<EwmaForecaster>();
+//            if (args.empty()) {
+//                return std::make_unique<EwmaForecaster>();
+//            }
+//            else {
+//                double alpha;
+//                try {
+//                    alpha = std::stod(args[0]);
+//                } catch (std::exception& e) {
+//                    throw std::runtime_error(std::string("Invalid alpha: ") + e.what());
+//                }
+//                
+//                if(alpha < 0.0 || alpha > 1.0) {
+//                    throw std::runtime_error("alpha must be between 0 and 1");
+//                }
+//                return std::make_unique<EwmaForecaster>(alpha);
+//            }
         };
         return true;
     } ();

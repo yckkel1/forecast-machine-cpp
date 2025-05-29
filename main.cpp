@@ -17,15 +17,9 @@
 
 int main(int argc, const char * argv[]) {
     // dynamically load csv on command line
-    if (argc < 4) {
-        std::cerr << "Usage: ./forecast_machine <input_file_path> <forecast_method> <steps_ahead> <optional: alpha>\n";
-        return 1;
-    }
+    
 
-    std::string input_file_path = argv[1];
-    std::string forecast_method = argv[2];
-    int steps_ahead = std::stoi(argv[3]);
-    std::vector<std::string> args(argv + 4, argv + argc);
+
 
     std::vector<RowData> source_data;
     try {
@@ -56,7 +50,7 @@ int main(int argc, const char * argv[]) {
     
     try {
         std::string output_file_path = util::output_file_path(output_data, forecast_method);
-        write_forecast_to_csv(output_data, output_file_path);
+        write_csv(output_data, output_file_path);
     } catch (const std::exception& e) {
         std::cerr << "Failed to write forecast to csv: " << e.what() << "\n";
         return 1;
