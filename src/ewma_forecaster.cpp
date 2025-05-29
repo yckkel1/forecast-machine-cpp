@@ -7,28 +7,25 @@
 #include "util/forecaster_registry.hpp"
 #include "math.h"
 #include <iomanip>
+#include "util/constants.hpp"
 
 // formula: Et = alpha*Xt + (1-alpha)*Et-1
 
 namespace {
     const bool registered = [] {
-        get_forecaster_registry()["ewma"] = [] (const std::vector<std::string>& args) {
-            if (args.empty()) {
-                return std::make_unique<EwmaForecaster>();
+        get_forecaster_registry()["ewma"] = [] (const ArgParser& arg_parser) {
+            std::string alpha_str = arg_parser.get_or_default(constants::ALPHA, constants::DEFAULT_ALPHA);
+            double alpha;
+            try {
+                alpha = std::stod(alpha_str);
+            } catch (std::exception& e) {
+                throw std::invalid_argument(std::string("Invalid alpha: ") + e.what());
             }
-            else {
-                double alpha;
-                try {
-                    alpha = std::stod(args[0]);
-                } catch (std::exception& e) {
-                    throw std::runtime_error(std::string("Invalid alpha: ") + e.what());
-                }
-                
-                if(alpha < 0.0 || alpha > 1.0) {
-                    throw std::runtime_error("alpha must be between 0 and 1");
-                }
-                return std::make_unique<EwmaForecaster>(alpha);
+            
+            if(alpha < 0.0 || alpha > 1.0) {
+                throw std::invalid_argument("alpha must be between 0 and 1");
             }
+            return std::make_unique<EwmaForecaster>(alpha);
         };
         return true;
     } ();

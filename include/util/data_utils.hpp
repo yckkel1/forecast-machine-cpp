@@ -19,5 +19,5 @@ namespace util {
 
     std::string trim(const std::string& str);
 
-    std::string output_file_path(const std::vector<PlotData>& data, const std::string& forecast_method);
+    std::string output_file_path(const std::vector<PlotData>& data, const std::string& method);
 }
