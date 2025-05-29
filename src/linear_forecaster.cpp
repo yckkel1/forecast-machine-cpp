@@ -4,7 +4,7 @@
 
 namespace {
     const bool registered = [] {
-        get_forecaster_registry()["linear"] = [] (const std::vector<std::string>& args) {
+        get_forecaster_registry()["linear"] = [] (const ArgParser& arg_parser) {
             return std::make_unique<LinearForecaster>();
         };
         return true;

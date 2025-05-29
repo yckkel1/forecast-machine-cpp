@@ -50,7 +50,7 @@ std::vector<RowData> load_csv(const std::string& file_path) {
     return values;
 }
 
-void write_forecast_to_csv(const std::vector<PlotData>& data, const std::string& filePath) {
+void write_csv(const std::vector<PlotData>& data, const std::string& filePath) {
     std::ofstream out(filePath);
     if(!out.is_open()) {
         throw std::runtime_error("Failed to open: " + filePath);

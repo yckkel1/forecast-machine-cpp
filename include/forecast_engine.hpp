@@ -8,7 +8,7 @@
 
 class ForecastEngine {
 protected:
-    std::string forecast_method;
+    std::string method;
 public:
     virtual std::vector<PlotData> forecast(const std::vector<RowData>& data, int steps_ahed) = 0;
     virtual ~ForecastEngine() = default;

@@ -8,5 +8,5 @@
 
 std::vector<RowData> load_csv(const std::string& file_path);
 
-void write_forecast_to_csv(const std::vector<PlotData>& data, const std::string& filePath);
+void write_csv(const std::vector<PlotData>& data, const std::string& filePath);
 

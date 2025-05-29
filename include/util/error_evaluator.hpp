@@ -11,7 +11,4 @@ public:
 
     static double root_mean_squared_error(const std::vector<PlotData>& forecast,
                                           const std::vector<PlotData>& actual);
-
-    static void summary(const std::vector<PlotData>& forecast,
-                        const std::vector<PlotData>& actual);
 };
