@@ -14,16 +14,16 @@ void ForecastRunner::run(int argc, const char* argv[]) {
     ArgParser arg_parser;
     arg_parser.parse(argc, argv);
 
-    std::vector<RowData> data = load_csv(arg_parser.get("input_file_path"));
+    std::vector<RowData> data = load_csv(arg_parser.get(constants::params::INPUT_FILE_PATH));
     if (data.empty()) {
         throw std::runtime_error("Input CSV is empty.");
     }
 
-    std::string method = arg_parser.get("method");
+    std::string method = arg_parser.get(constants::params::METHOD);
     std::unique_ptr<ForecastEngine> forecaster = create_forecaster(method, arg_parser);
 
-    if (arg_parser.get_or_default(constants::operations::FORECAST, constants::FALSE_VAL) == constants::TRUE_VAL) {
-        int steps_ahead = std::stoi(arg_parser.get_or_default("steps_ahead", constants::DEFAULT_STEPS_AHEAD));
+    if (arg_parser.get(constants::operations::FORECAST) == constants::TRUE_VAL) {
+        int steps_ahead = std::stoi(arg_parser.get(constants::params::STEPS_AHEAD));
         std::vector<PlotData> forecasted = forecaster->forecast(data, steps_ahead);
 
         std::string out_path = util::output_file_path(forecasted, method);
@@ -31,8 +31,8 @@ void ForecastRunner::run(int argc, const char* argv[]) {
         std::cout << "Forecast written to: " << out_path << "\n";
     }
 
-    if (arg_parser.get_or_default(constants::operations::EVALUATE, constants::FALSE_VAL) == constants::TRUE_VAL) {
-        double ratio = std::stod(arg_parser.get_or_default("train_ratio", constants::DEFAULT_TRAIN_RATIO));
+    if (arg_parser.get(constants::operations::EVALUATE) == constants::TRUE_VAL) {
+        double ratio = std::stod(arg_parser.get("train_ratio"));
         int split_pos = static_cast<int>(ratio * data.size());
 
         if (split_pos <= 0 || split_pos >= data.size()) {
@@ -46,7 +46,7 @@ void ForecastRunner::run(int argc, const char* argv[]) {
         std::cout << "forecasted size: " << forecasted.size() << std::endl;
 
         std::vector<PlotData> actual;
-        if (arg_parser.get(constants::METHOD) == constants::models::EWMA) {
+        if (arg_parser.get(constants::params::METHOD) == constants::methods::EWMA) {
             // ewma is not applicable for predicting
             for (const RowData& r : train) {
                 actual.emplace_back(r.getDate(), r.getClose());

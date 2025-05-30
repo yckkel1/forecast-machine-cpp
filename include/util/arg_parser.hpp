@@ -2,15 +2,18 @@
 
 #include <string>
 #include <map>
+#include "util/arg_spec.hpp"
 
 class ArgParser {
 public:
     void parse(int argc, const char* argv[]);
 
     const std::string& get(const std::string& key) const;
-    const std::string& get_or_default(const std::string& key, const std::string& default_value) const;
-
+    
 private:
     std::map<std::string, std::string> arg_map;
-    void validate() const;
+    std::map<std::string, ArgSpec> arg_specs;
+    void validate_and_store(const std::string& key, const std::string& value);
+    void validate_final();
+    void initialize_specs();
 };
