@@ -1,4 +1,4 @@
-#include "csv_loader.hpp"
+#include "csv_manager.hpp"
 #include "dto/plot_data.hpp"
 #include "dto/row_data.hpp"
 #include "util/data_utils.hpp"
@@ -10,7 +10,7 @@
 #include <vector>
 
 std::vector<RowData> load_csv(const std::string& file_path) {
-    std::cout << std::filesystem::current_path() << std::endl;
+//    std::cout << std::filesystem::current_path() << std::endl;
     std::vector<RowData> values;
     std::ifstream file(file_path);
     
