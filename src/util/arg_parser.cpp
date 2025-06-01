@@ -33,6 +33,11 @@ const std::string& ArgParser::get(const std::string& key) const {
 }
 
 void ArgParser::validate_and_store(const std::string& key, const std::string& value) {
+    if(key == constants::params::INPUT_FILE_PATH) {
+        arg_map[constants::params::INPUT_FILE_PATH] = value;
+        return;
+    }
+    
     if (arg_specs.find(key) == arg_specs.end()) {
         throw std::runtime_error("Unknown argument: --" + key);
     }
@@ -90,11 +95,11 @@ void ArgParser::validate_and_set_default() {
 }
 
 void ArgParser::initialize_specs() {
-    arg_specs[constants::params::ALPHA] = ArgSpec::Double(constants::FALSE_VAL, constants::DEFAULT_ALPHA_FLOOR, constants::DEFAULT_ALPHA_CEILING, constants::DEFAULT_ALPHA);
-    arg_specs[constants::params::TRAIN_RATIO] = ArgSpec::Double(constants::FALSE_VAL, constants::DEFAULT_TRAIN_RATIO_FLOOR, constants::DEFAULT_TRAIN_RATIO_CEILING, constants::DEFAULT_TRAIN_RATIO);
-    arg_specs[constants::params::STEPS_AHEAD] = ArgSpec::Integer(constants::FALSE_VAL, constants::DEFAULT_STEPS_AHEAD_FLOOR, constants::DEFAULT_STEPS_AHEAD_CEILING, constants::DEFAULT_STEPS_AHEAD);
-    arg_specs[constants::params::METHOD] = ArgSpec::String(constants::TRUE_VAL, constants::methods::ALL_METHODS);
-    arg_specs[constants::operations::FORECAST] = ArgSpec::Boolean(constants::FALSE_VAL);
-    arg_specs[constants::operations::EVALUATE] = ArgSpec::Boolean(constants::FALSE_VAL);
+    arg_specs[constants::params::ALPHA] = ArgSpec::Double(false, constants::DEFAULT_ALPHA_FLOOR, constants::DEFAULT_ALPHA_CEILING, constants::DEFAULT_ALPHA);
+    arg_specs[constants::params::TRAIN_RATIO] = ArgSpec::Double(false, constants::DEFAULT_TRAIN_RATIO_FLOOR, constants::DEFAULT_TRAIN_RATIO_CEILING, constants::DEFAULT_TRAIN_RATIO);
+    arg_specs[constants::params::STEPS_AHEAD] = ArgSpec::Integer(false, constants::DEFAULT_STEPS_AHEAD_FLOOR, constants::DEFAULT_STEPS_AHEAD_CEILING, constants::DEFAULT_STEPS_AHEAD);
+    arg_specs[constants::params::METHOD] = ArgSpec::String(true, constants::methods::ALL_METHODS);
+    arg_specs[constants::operations::FORECAST] = ArgSpec::Boolean(false);
+    arg_specs[constants::operations::EVALUATE] = ArgSpec::Boolean(false);
 }
 
