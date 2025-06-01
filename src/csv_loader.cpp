@@ -10,7 +10,7 @@
 #include <vector>
 
 std::vector<RowData> load_csv(const std::string& file_path) {
-    std::cout << std::filesystem::current_path() << std::endl;
+//    std::cout << std::filesystem::current_path() << std::endl;
     std::vector<RowData> values;
     std::ifstream file(file_path);
     

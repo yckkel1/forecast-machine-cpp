@@ -21,7 +21,7 @@ void ArgParser::parse(int argc, const char* argv[]) {
         std::string value = arg.substr(eq+1);
         validate_and_store(key, value);
     }
-    validate_final();
+    validate_and_set_default();
 }
 
 const std::string& ArgParser::get(const std::string& key) const {
@@ -71,7 +71,7 @@ void ArgParser::validate_and_store(const std::string& key, const std::string& va
     arg_map[key] = value;
 }
 
-void ArgParser::validate_final() {
+void ArgParser::validate_and_set_default() {
     for(auto [key, spec] : arg_specs) {
         if(arg_map.find(key) == arg_map.end()) {
             if(spec.required) {

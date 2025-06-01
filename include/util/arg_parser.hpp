@@ -14,6 +14,6 @@ private:
     std::map<std::string, std::string> arg_map;
     std::map<std::string, ArgSpec> arg_specs;
     void validate_and_store(const std::string& key, const std::string& value);
-    void validate_final();
+    void validate_and_set_default();
     void initialize_specs();
 };
