@@ -12,9 +12,6 @@ namespace {
 }
 
 std::vector<PlotData> LinearForecaster::forecast(const std::vector<RowData>& data, int steps_ahead) {
-    if(data.empty() || steps_ahead <= 0) {
-        return {};
-    }
     std::vector<PlotData> plotData;
     std::array<double, 2> params = get_params(data);
     

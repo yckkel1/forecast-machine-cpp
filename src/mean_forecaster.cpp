@@ -17,9 +17,6 @@ namespace {
 
 std::vector<PlotData> MeanForecaster::forecast(const std::vector<RowData>& data, int steps_ahead) {
     // returns a vector of length steps_ahead, where each element is mean of data
-    if(data.empty() || steps_ahead <= 0) {
-        return {};
-    }
     std::vector<PlotData> plotData;
     
     std::chrono::year_month_day last_date = data.back().getDate();

@@ -46,6 +46,9 @@ std::vector<RowData> load_csv(const std::string& file_path) {
             throw new std::runtime_error(std::string("Date parsing failed: ") + e.what());
         }
     }
+    if(values.size() < 2) {
+        throw new std::runtime_error("CSV File too short");
+    }
 
     return values;
 }
