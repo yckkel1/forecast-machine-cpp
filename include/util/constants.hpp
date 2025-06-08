@@ -45,8 +45,9 @@ namespace constants {
         inline constexpr const char* MEAN = "mean";
         inline constexpr const char* EWMA = "ewma";
         inline constexpr const char* LINEAR = "linear";
+        inline constexpr const char* HOLT = "holt";
         inline const std::set<std::string> ALL_METHODS = {
-            MEAN, EWMA, LINEAR
+            MEAN, EWMA, LINEAR, HOLT
         };
     }
 }
