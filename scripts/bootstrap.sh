@@ -19,5 +19,8 @@ else
 fi
 
 brew install gnuplot
+brew install mysql
+brew install mysql-connector-c++
+brew services start mysql
 
 date 

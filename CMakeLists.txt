@@ -21,6 +21,9 @@ set(SOURCES ${SOURCES} ${PROJECT_SOURCE_DIR}/main.cpp)
 file(GLOB_RECURSE HEADERS "include/*.hpp")
 file(GLOB_RECURSE SCRIPTS "scripts/*.sh")
 
+# Include Dot Env
+include_directories(${PROJECT_SOURCE_DIR}/external/dotenv)
+
 # Group files for Xcode UI organization
 source_group("Source Files" FILES ${SOURCES})
 source_group("Header Files" FILES ${HEADERS})
