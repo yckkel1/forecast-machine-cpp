@@ -5,8 +5,8 @@
 
 class EnvConfig {
 private:
-    static DotEnv env;
+    static Dotenv env;
 public:
     static void init();
-    static std::string get(const std::string& key, const std::string& default_value);
-}
+    static std::string get(const std::string& key);
+};

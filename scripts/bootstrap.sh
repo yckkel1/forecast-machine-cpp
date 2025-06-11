@@ -20,7 +20,7 @@ fi
 
 brew install gnuplot
 brew install mysql
-brew install mysql-connector-c++
 brew services start mysql
+# Use https://downloads.mysql.com/archives/c-cpp/ MySQL Connector
 
 date 

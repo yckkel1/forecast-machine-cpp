@@ -75,5 +75,9 @@ namespace util {
         // example: output/mean/mean_forecast_20250101_20250102.csv
         return file_path + "/" + method + "_forecast_" + begin_date + "_" + end_date + ".csv";
     }
+
+    std::string to_sql_date_string(const std::string& date_str) {
+        return std::format("'{}'", date_str);
+    }
 }
 
