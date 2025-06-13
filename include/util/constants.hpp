@@ -58,9 +58,5 @@ namespace constants {
             inline constexpr const char* SPY = "spy";
             inline constexpr const char* NDQ = "ndq";
         }
-        inline const std::unordered_map<std::string, std::string> PATHS = {
-            {index::SPY, "selectSpyDataByDateRanges.sql"},
-            {index::NDQ, "selectNdqDataByDateRanges.sql"}
-        };
     }
 }

@@ -32,12 +32,13 @@ source_group("Bash Scripts" FILES ${SCRIPTS})
 # Build the executable
 add_executable(forecast_engine ${SOURCES} ${HEADERS} ${SCRIPTS})
 
-# Add MySQL Connector
-include_directories(/usr/local/mysql-connector-c++-9.2.0/include)
-link_directories(/usr/local/mysql-connector-c++-9.2.0/lib64)
-target_link_libraries(forecast_engine /usr/local/mysql-connector-c++-9.2.0/lib64/libmysqlcppconn.dylib)
+# Add Mysql Connector
+include_directories(/opt/homebrew/opt/mysql-connector-c++/include)
+link_directories(/opt/homebrew/opt/mysql-connector-c++/lib)
+target_link_libraries(forecast_engine /opt/homebrew/opt/mysql-connector-c++/lib/libmysqlcppconnx.dylib)
 
-add_compile_definitions(SQL_BASE_PATH="${PROJECT_SOURCE_DIR}/resources/sql/")
+
+# add_compile_definitions(SQL_BASE_PATH="${PROJECT_SOURCE_DIR}/resources/sql/")
 
 
 

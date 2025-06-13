@@ -7,8 +7,10 @@ int main(int argc, const char * argv[]) {
 //    runner.run(argc, argv);
     try {
         MysqlService mysql_service;
-        std::vector<RowData> results = mysql_service.load_data("ndq", "2020-01-01", "2020-01-05");
-        std::cout << "success" << std::endl;
+        std::vector<RowData> results = mysql_service.load_history_data("ndq", "2020-01-01", "2020-01-05");
+        for(auto r : results) {
+            std::cout << r << std::endl;
+        }
         return 0;
     } catch (const std::exception& ex) {
         std::cerr << "Fatal exception: " << ex.what() << "\n";
