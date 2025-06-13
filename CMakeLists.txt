@@ -21,6 +21,9 @@ set(SOURCES ${SOURCES} ${PROJECT_SOURCE_DIR}/main.cpp)
 file(GLOB_RECURSE HEADERS "include/*.hpp")
 file(GLOB_RECURSE SCRIPTS "scripts/*.sh")
 
+# Include Dot Env
+include_directories(${PROJECT_SOURCE_DIR}/external/dotenv)
+
 # Group files for Xcode UI organization
 source_group("Source Files" FILES ${SOURCES})
 source_group("Header Files" FILES ${HEADERS})
@@ -28,3 +31,14 @@ source_group("Bash Scripts" FILES ${SCRIPTS})
 
 # Build the executable
 add_executable(forecast_engine ${SOURCES} ${HEADERS} ${SCRIPTS})
+
+# Add Mysql Connector
+include_directories(/opt/homebrew/opt/mysql-connector-c++/include)
+link_directories(/opt/homebrew/opt/mysql-connector-c++/lib)
+target_link_libraries(forecast_engine /opt/homebrew/opt/mysql-connector-c++/lib/libmysqlcppconnx.dylib)
+
+
+# add_compile_definitions(SQL_BASE_PATH="${PROJECT_SOURCE_DIR}/resources/sql/")
+
+
+

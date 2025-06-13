@@ -7,6 +7,8 @@ namespace constants {
     inline constexpr const char* TRUE_VAL = "true";
     inline constexpr const char* FALSE_VAL = "false";
     inline constexpr const char* OUTPUT_DIR = "output/";
+    inline constexpr const char* QUERIES_DIR = "queries/";
+    inline constexpr const char* SCHEMAS_DIR = "schemas/";
 
     inline constexpr const char* DEFAULT_ALPHA = "0.3";
     inline constexpr const double DEFAULT_ALPHA_FLOOR = 0.0;
@@ -49,5 +51,12 @@ namespace constants {
         inline const std::set<std::string> ALL_METHODS = {
             MEAN, EWMA, LINEAR, HOLT
         };
+    }
+
+    namespace tickers {
+        namespace index {
+            inline constexpr const char* SPY = "spy";
+            inline constexpr const char* NDQ = "ndq";
+        }
     }
 }
