@@ -20,6 +20,4 @@ namespace util {
     std::string trim(const std::string& str);
 
     std::string output_file_path(const std::vector<PlotData>& data, const std::string& method);
-
-    std::string to_sql_date_string(const std::string& date_str);
 }
