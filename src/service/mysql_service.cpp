@@ -37,6 +37,28 @@ public:
         return data;
     }
     
+    void insert_history_data(const std::string& ticker, const std::vector<RowData>& data) {
+        if(data.empty()) {
+            throw std::invalid_argument("Failed to insert history data; data is empty");
+        }
+        mysqlx::Schema schema(session, history_data_schema);
+        mysqlx::Table table = schema.getTable(get_table_name_from_ticker(ticker), true);
+        mysqlx::TableInsert insert = table.insert("DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOLUME");
+
+        for (const auto& row : data) {
+            insert.values(
+                util::date_to_string(row.getDate()),
+                row.getOpen(),
+                row.getHigh(),
+                row.getLow(),
+                row.getClose(),
+                static_cast<int64_t>(row.getVolume())  // cast to avoid uint mismatch
+            );
+        }
+
+        insert.execute();
+    }
+    
 private:
     mysqlx::Session session;
     std::string history_data_schema;
@@ -65,4 +87,8 @@ MysqlService::~MysqlService() = default;
 
 std::vector<RowData> MysqlService::load_history_data(const std::string& ticker, const std::string& start_date, const std::string& end_date) {
     return impl->load_history_data(ticker, start_date, end_date);
+}
+
+void MysqlService::insert_history_data(const std::string& ticker, const std::vector<RowData>& data) {
+    return impl->insert_history_data(ticker, data);
 }
