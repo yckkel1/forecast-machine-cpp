@@ -30,8 +30,12 @@ namespace constants {
         inline constexpr const char* TRAIN_RATIO = "train_ratio";
         inline constexpr const char* INPUT_FILE_PATH = "input_file_path";
         inline constexpr const char* METHOD = "method";
+        inline constexpr const char* DATA_SOURCE = "data_source";
+        inline constexpr const char* START_DATE = "start_date";
+        inline constexpr const char* END_DATE = "end_date";
+        inline constexpr const char* TICKER = "ticker";
         inline const std::set<std::string> ALL_PARAMS = {
-            ALPHA, BETA, STEPS_AHEAD, TRAIN_RATIO, INPUT_FILE_PATH, METHOD
+            ALPHA, BETA, STEPS_AHEAD, TRAIN_RATIO, INPUT_FILE_PATH, METHOD, DATA_SOURCE, START_DATE, END_DATE, TICKER
         };
     }
 
@@ -58,5 +62,13 @@ namespace constants {
             inline constexpr const char* SPY = "spy";
             inline constexpr const char* NDQ = "ndq";
         }
+    }
+
+    namespace datasource {
+        inline constexpr const char* CSV = "csv";
+        inline constexpr const char* DB = "db";
+        inline const std::set<std::string> ALL_DATASOURCES = {
+           CSV, DB
+        };
     }
 }
