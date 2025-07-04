@@ -8,7 +8,7 @@
 void ArgParser::parse(int argc, const char* argv[]) {
     initialize_specs();
     if (argc < 4) {
-        throw new std::invalid_argument("Required arguments: ./forecast_machine --input_file_path=... --method=... --evaluate(=true)/--forecast(=true)");
+        throw new std::invalid_argument("Required arguments: ./forecast_machine --data_source=... --method=... --evaluate(=true)/--forecast(=true)");
     }
     
     for (int i = 1; i < argc; ++i) {
@@ -33,11 +33,6 @@ const std::string& ArgParser::get(const std::string& key) const {
 }
 
 void ArgParser::validate_and_store(const std::string& key, const std::string& value) {
-    if(key == constants::params::INPUT_FILE_PATH) {
-        arg_map[constants::params::INPUT_FILE_PATH] = value;
-        return;
-    }
-    
     if (arg_specs.find(key) == arg_specs.end()) {
         throw std::runtime_error("Unknown argument: --" + key);
     }
@@ -102,5 +97,10 @@ void ArgParser::initialize_specs() {
     arg_specs[constants::params::METHOD] = ArgSpec::String(true, constants::methods::ALL_METHODS);
     arg_specs[constants::operations::FORECAST] = ArgSpec::Boolean(false);
     arg_specs[constants::operations::EVALUATE] = ArgSpec::Boolean(false);
+    arg_specs[constants::params::DATA_SOURCE] = ArgSpec::String(true, constants::datasource::ALL_DATASOURCES);
+    arg_specs[constants::params::INPUT_FILE_PATH] = ArgSpec::String(false);
+    arg_specs[constants::params::TICKER] = ArgSpec::String(false);
+    arg_specs[constants::params::START_DATE] = ArgSpec::String(false);
+    arg_specs[constants::params::END_DATE] = ArgSpec::String(false);
 }
 

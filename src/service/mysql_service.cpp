@@ -19,12 +19,23 @@ public:
         std::vector<RowData> data;
         mysqlx::Schema schema(session, history_data_schema);
         mysqlx::Table table = schema.getTable(get_table_name_from_ticker(ticker), true);
-        mysqlx:: RowResult res = table.select("DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOLUME")
+//        std::cout << "Using Schema: " << history_data_schema << std::endl;
+//        std::cout << "Using Table: " << table.getName() << std::endl;
+        
+        mysqlx:: RowResult res = table.select("CAST(DATE AS CHAR) AS DATE", "OPEN", "HIGH", "LOW", "CLOSE", "VOLUME")
                                         .where("DATE BETWEEN :start_date AND :end_date")
                                         .bind("start_date", start_date)
                                         .bind("end_date", end_date)
                                         .execute();
         for (const mysqlx::Row& row : res) {
+//            std::cout << "Number of Col: " << row.colCount() << std::endl;
+//            for (std::size_t i = 0; i < row.colCount(); ++i) {
+//                if (row[i].isNull()) {
+//                    std::cout << "NULL ";
+//                } else {
+//                    std::cout << row[i] << " ";
+//                }
+//            }
             data.emplace_back(
                 util::parse_date_string(row[0].get<std::string>()), // DATE
                 row[1].get<double>(), // OPEN

@@ -5,6 +5,7 @@
 #include "util/error_evaluator.hpp"
 #include "util/forecaster_registry.hpp"
 #include "util/constants.hpp"
+#include "service/mysql_service.hpp"
 
 #include <iostream>
 #include <memory>
@@ -13,8 +14,22 @@
 void ForecastRunner::run(int argc, const char* argv[]) {
     ArgParser arg_parser;
     arg_parser.parse(argc, argv);
+    
+    std::string data_source = arg_parser.get(constants::params::DATA_SOURCE);
+    std::vector<RowData> data;
+    if(data_source == constants::datasource::CSV) {
+        data = load_csv(arg_parser.get(constants::params::INPUT_FILE_PATH));
+    }
+    else {
+        std::string start_date = arg_parser.get(constants::params::START_DATE);
+        std::cout << "start_date: " << start_date << std::endl;
+        std::string end_date = arg_parser.get(constants::params::END_DATE);
+        std::cout << "end_date: " << end_date << std::endl;
+        std::string ticker = arg_parser.get(constants::params::TICKER);
+        MysqlService mysql_service;
+        data = mysql_service.load_history_data(ticker, start_date, end_date);
+    }
 
-    std::vector<RowData> data = load_csv(arg_parser.get(constants::params::INPUT_FILE_PATH));
     if (data.empty()) {
         throw std::runtime_error("Input CSV is empty.");
     }
