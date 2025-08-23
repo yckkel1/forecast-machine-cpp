@@ -3,6 +3,9 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include <unordered_map>
+#include <algorithm>
+#include <cctype>
 #include "dto/plot_data.hpp"
 
 namespace util {

@@ -4,6 +4,7 @@
 #include <vector>
 #include "dto/row_data.hpp"
 #include <chrono>
+#include <memory>
 
 class MysqlService {
 private:

@@ -5,6 +5,9 @@
 #include <sstream>
 #include <iomanip>
 #include <vector>
+#include <unordered_map>
+#include <algorithm>
+#include <cctype>
 #include <filesystem>
 #include "util/constants.hpp"
 
