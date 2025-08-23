@@ -8,7 +8,7 @@
 void ArgParser::parse(int argc, const char* argv[]) {
     initialize_specs();
     if (argc < 4) {
-        throw new std::invalid_argument("Required arguments: ./forecast_machine --data_source=... --method=... --evaluate(=true)/--forecast(=true)");
+        throw std::invalid_argument("Required arguments: ./forecast_machine --data_source=... --method=... --evaluate(=true)/--forecast(=true)");
     }
     
     for (int i = 1; i < argc; ++i) {

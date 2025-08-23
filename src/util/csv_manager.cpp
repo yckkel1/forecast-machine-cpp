@@ -25,7 +25,7 @@ std::vector<RowData> load_csv(const std::string& file_path) {
     while (std::getline(file, line)) {
         std::vector<std::string> row = util::split_csv_line(line);
         if(row.size() != header_map.size()) {
-            throw new std::runtime_error("Invalid csv data");
+            throw std::runtime_error("Invalid csv data");
         }
         
         try {
@@ -39,15 +39,15 @@ std::vector<RowData> load_csv(const std::string& file_path) {
             );
             values.push_back(rowData);
         } catch (const std::invalid_argument& e) {
-            throw new std::runtime_error(std::string("Invalid input: ") + e.what());
+            throw std::runtime_error(std::string("Invalid input: ") + e.what());
         } catch (const std::out_of_range& e) {
-            throw new std::runtime_error(std::string("Value out of range: ") + e.what());
+            throw std::runtime_error(std::string("Value out of range: ") + e.what());
         } catch (const std::runtime_error& e) {
-            throw new std::runtime_error(std::string("Date parsing failed: ") + e.what());
+            throw std::runtime_error(std::string("Date parsing failed: ") + e.what());
         }
     }
     if(values.size() < 2) {
-        throw new std::runtime_error("CSV File too short");
+        throw std::runtime_error("CSV File too short");
     }
 
     return values;
