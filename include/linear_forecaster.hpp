@@ -8,7 +8,7 @@ public:
     LinearForecaster() {
         method = "linear";
     }
-    std::string const get_method() { return method; }
+    const std::string& get_method() const { return method; }
     std::vector<PlotData> forecast(const std::vector<RowData>& data, int steps_ahead) override;
     std::array<double, 2> get_params(const std::vector<RowData>& data);
 };

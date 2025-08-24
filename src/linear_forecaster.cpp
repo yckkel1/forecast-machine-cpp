@@ -29,7 +29,7 @@ std::vector<PlotData> LinearForecaster::forecast(const std::vector<RowData>& dat
 std::array<double, 2> LinearForecaster::get_params(const std::vector<RowData>& data) {
     std::array<double, 2> params; // params[0]: slope, params[1]: intercept
     double t = 0.0, t_squared = 0.0, y = 0.0, ty = 0.0;
-    for(auto i=0; i<data.size(); i++) {
+    for(std::size_t i = 0; i < data.size(); i++) {
         double ti = static_cast<double>(i);
         t += ti;
         t_squared += pow(ti, 2.0);
