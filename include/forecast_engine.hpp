@@ -10,6 +10,6 @@ class ForecastEngine {
 protected:
     std::string method;
 public:
-    virtual std::vector<PlotData> forecast(const std::vector<RowData>& data, int steps_ahed) = 0;
+    virtual std::vector<PlotData> forecast(const std::vector<RowData>& data, int steps_ahead) = 0;
     virtual ~ForecastEngine() = default;
 };

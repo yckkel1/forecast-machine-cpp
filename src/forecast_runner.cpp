@@ -47,11 +47,11 @@ void ForecastRunner::run(int argc, const char* argv[]) {
     }
 
     if (arg_parser.get(constants::operations::EVALUATE) == constants::TRUE_VAL) {
-        double ratio = std::stod(arg_parser.get("train_ratio"));
+        double ratio = std::stod(arg_parser.get(constants::params::TRAIN_RATIO));
         int split_pos = static_cast<int>(ratio * data.size());
 
         if (split_pos <= 0 || split_pos >= data.size()) {
-            throw std::runtime_error("Invalid traiN_ratio: not enough data to split.");
+            throw std::runtime_error("Invalid train_ratio: not enough data to split.");
         }
 
         std::vector<RowData> train(data.begin(), data.begin() + split_pos);

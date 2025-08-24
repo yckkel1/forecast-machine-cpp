@@ -7,6 +7,6 @@ public:
     MeanForecaster() {
         method = "mean";
     }
-    std::string const get_method() { return method; }
+    const std::string& get_method() const { return method; }
     std::vector<PlotData> forecast(const std::vector<RowData>& data, int steps_ahead) override;
 };

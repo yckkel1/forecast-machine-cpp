@@ -10,8 +10,8 @@ public:
     HoltForecaster(double alpha, double beta) : alpha(alpha), beta(beta) {
         method = "holt";
     };
-    double const get_alpha() { return alpha; }
-    double const get_beta() { return beta; }
-    std::string const get_method() { return method; }
+    double get_alpha() const { return alpha; }
+    double get_beta() const { return beta; }
+    const std::string& get_method() const { return method; }
     std::vector<PlotData> forecast(const std::vector<RowData>& data, int steps_ahead) override;
 };

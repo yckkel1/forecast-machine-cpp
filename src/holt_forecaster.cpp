@@ -23,7 +23,7 @@ std::vector<PlotData> HoltForecaster::forecast(const std::vector<RowData>& data,
     double prevLevel = data[0].getClose();
     double trend = data[1].getClose() - data[0].getClose();
     double prevTrend = data[1].getClose() - data[0].getClose();
-    for(auto i=1; i<data.size(); i++) {
+    for(std::size_t i = 1; i < data.size(); i++) {
         double curClose = data[i].getClose();
         prevLevel = level;
         level = alpha * curClose + (1 - alpha) * (level + trend);
